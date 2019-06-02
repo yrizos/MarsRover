@@ -39,4 +39,4 @@ The output for each rover should be its final co-ordinates and heading.
     1 3 N
     5 1 E
     
-Run `./bin/marsrover.php input/input1.txt` to get the aforementioned test output.    
+Run `./bin/marsrover input/input1.txt` to get the aforementioned test output.    
