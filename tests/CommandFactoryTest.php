@@ -1,5 +1,7 @@
 <?php declare (strict_types = 1);
 
+namespace MarsRover;
+
 class CommandFactoryTest extends \PHPUnit\Framework\TestCase
 {
     public function testCommandFactory(): void

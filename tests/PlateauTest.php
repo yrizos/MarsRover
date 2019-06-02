@@ -1,5 +1,7 @@
 <?php declare (strict_types = 1);
 
+namespace MarsRover;
+
 class PlateauTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructor(): void

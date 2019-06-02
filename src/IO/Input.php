@@ -17,6 +17,12 @@ class Input
     public function __construct(string $input)
     {
         $input = trim($input);
+        $input = strtr($input, [
+            "\r\n" => PHP_EOL,
+            "\r"   => PHP_EOL,
+            "\n"   => PHP_EOL,
+        ]);
+
         $input = explode(PHP_EOL, $input);
         $input = array_map('trim', $input);
 

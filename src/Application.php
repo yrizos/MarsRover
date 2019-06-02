@@ -15,8 +15,7 @@ class Application
             $input = file_get_contents($input);
         }
 
-        $input = new Input($input);
-
+        $input   = new Input($input);
         $plateau = new Plateau($input->getPlateau()->getPosition());
         $rovers  = $input->getRovers();
         $output  = new Output();

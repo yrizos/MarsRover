@@ -12,4 +12,5 @@ parameters:
 
     PhpCsFixer\Fixer\Basic\BracesFixer: ~
 
+    PhpCsFixer\Fixer\PhpUnit\PhpUnitStrictFixer: ~
     
