@@ -1,4 +1,6 @@
-An over-engineered PHP solution to ThoughtWorks' Mars Rover interview coding challenge.
+A PHP approach to ThoughtWorks' Mars Rover interview coding challenge.
+
+[![Build Status](https://travis-ci.org/yrizos/MarsRover.svg?branch=master)](https://travis-ci.org/yrizos/MarsRover)
 
 ## The problem
 
