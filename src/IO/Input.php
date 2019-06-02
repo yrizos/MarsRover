@@ -4,8 +4,14 @@ namespace MarsRover\IO;
 
 class Input
 {
+    /**
+     * @var PlateuInput
+     */
     private $plateau;
 
+    /**
+     * @var RoverInput[]
+     */
     private $rovers = [];
 
     public function __construct(string $input)
@@ -33,6 +39,9 @@ class Input
         return $this->plateau;
     }
 
+    /**
+     * @return RoverInput[]
+     */
     public function getRovers(): array
     {
         return $this->rovers;

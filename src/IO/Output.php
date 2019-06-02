@@ -6,9 +6,15 @@ use MarsRover\Model\Rover;
 
 class Output
 {
+    /**
+     * @var string[]
+     */
     private $output = [];
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return implode(PHP_EOL, $this->getOutput());
     }
@@ -20,7 +26,10 @@ class Output
         return $this;
     }
 
-    public function getOutput()
+    /**
+     * @return string[]
+     */
+    public function getOutput(): array
     {
         return $this->output;
     }

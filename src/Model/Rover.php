@@ -20,6 +20,9 @@ class Rover
         setPosition as protected traitSetPosition;
     }
 
+    /**
+     * @var Plateau
+     */
     private $plateau;
 
     public function __construct(
@@ -33,7 +36,10 @@ class Rover
             ->setDirection($direction);
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return implode(
             ' ',

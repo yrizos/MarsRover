@@ -6,6 +6,9 @@ use MarsRover\Exception\InvalidDirectionException;
 
 class Direction
 {
+    /**
+     * @var string
+     */
     private $direction;
 
     public function __construct(string $direction)

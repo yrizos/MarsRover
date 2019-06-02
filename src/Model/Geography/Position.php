@@ -4,8 +4,14 @@ namespace MarsRover\Model\Geography;
 
 class Position
 {
+    /**
+     * @var int
+     */
     private $x;
 
+    /**
+     * @var int
+     */
     private $y;
 
     public function __construct(

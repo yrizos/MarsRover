@@ -10,8 +10,14 @@ use MarsRover\Model\Geography\Position;
 
 class RoverInput
 {
+    /**
+     * @var CommandCollection
+     */
     private $commands;
 
+    /**
+     * @var Pose
+     */
     private $pose;
 
     public function __construct(

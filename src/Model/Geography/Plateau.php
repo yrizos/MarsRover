@@ -4,8 +4,14 @@ namespace MarsRover\Model\Geography;
 
 class Plateau
 {
+    /**
+     * @var Position
+     */
     private $lowerLeftCoordinates;
 
+    /**
+     * @var Position
+     */
     private $upperRightCoordinates;
 
     public function __construct(Position $upperRightCoordinates)
@@ -24,7 +30,7 @@ class Plateau
         return $this->upperRightCoordinates;
     }
 
-    public function isOutOfBounds(Position $coordinates)
+    public function isOutOfBounds(Position $coordinates): bool
     {
         return ! (
             $coordinates->getX() >= $this->lowerLeftCoordinates->getX()

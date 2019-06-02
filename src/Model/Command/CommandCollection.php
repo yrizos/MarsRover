@@ -4,8 +4,14 @@ namespace MarsRover\Model\Command;
 
 class CommandCollection implements \Countable, \Iterator
 {
+    /**
+     * @var CommandInterface[]
+     */
     private $commands = [];
 
+    /**
+     * @var int
+     */
     private $position = 0;
 
     public function addCommand(CommandInterface $command): self
@@ -15,6 +21,9 @@ class CommandCollection implements \Countable, \Iterator
         return $this;
     }
 
+    /**
+     * @param CommandInterface[] $commands
+     */
     public function addCommands(array $commands): self
     {
         foreach ($commands as $command) {
@@ -24,22 +33,34 @@ class CommandCollection implements \Countable, \Iterator
         return $this;
     }
 
-    public function count()
+    /**
+     * @return int
+     */
+    public function count(): int
     {
         return count($this->getCommands());
     }
 
-    public function current()
+    /**
+     * @return CommandInterface
+     */
+    public function current(): CommandInterface
     {
         return $this->getCommands()[$this->position];
     }
 
+    /**
+     * @return CommandInterface[]
+     */
     public function getCommands(): array
     {
         return $this->commands;
     }
 
-    public function key()
+    /**
+     * @return int
+     */
+    public function key(): int
     {
         return $this->position;
     }
@@ -54,7 +75,7 @@ class CommandCollection implements \Countable, \Iterator
         $this->position = 0;
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->getCommands()[$this->position]);
     }

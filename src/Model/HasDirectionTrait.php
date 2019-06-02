@@ -6,6 +6,9 @@ use MarsRover\Model\Geography\Direction;
 
 trait HasDirectionTrait
 {
+    /**
+     * @var Direction
+     */
     private $direction;
 
     public function getDirection(): Direction
@@ -13,7 +16,7 @@ trait HasDirectionTrait
         return $this->direction;
     }
 
-    protected function setDirection(Direction $direction)
+    protected function setDirection(Direction $direction): self
     {
         $this->direction = $direction;
 

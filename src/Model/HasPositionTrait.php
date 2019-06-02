@@ -6,6 +6,9 @@ use MarsRover\Model\Geography\Position;
 
 trait HasPositionTrait
 {
+    /**
+     * @var Position
+     */
     private $position;
 
     public function getPosition(): Position
@@ -13,7 +16,7 @@ trait HasPositionTrait
         return $this->position;
     }
 
-    protected function setPosition(Position $position)
+    protected function setPosition(Position $position): self
     {
         $this->position = $position;
 
