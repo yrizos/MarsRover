@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types = 1);
 
 namespace MarsRover\Model;
 
@@ -22,24 +22,30 @@ class Rover
 
     private $plateau;
 
-    public function __construct(Plateau $plateau, Position $position, Direction $direction)
-    {
+    public function __construct(
+        Plateau $plateau,
+        Position $position,
+        Direction $direction
+    ) {
         $this->plateau = $plateau;
 
         $this->setPosition($position)
             ->setDirection($direction);
     }
 
-    public function executeMultiple(CommandCollection $commands): Rover
+    public function __toString()
     {
-        foreach ($commands as $command) {
-            $this->execute($command);
-        }
-
-        return $this;
+        return implode(
+            ' ',
+            [
+                $this->getPosition()->getX(),
+                $this->getPosition()->getY(),
+                $this->getDirection()->getDirection(),
+            ]
+        );
     }
 
-    public function execute(CommandInterface $command): Rover
+    public function execute(CommandInterface $command): self
     {
         if ($command instanceof MoveForwardCommand) {
             return $this->move();
@@ -52,7 +58,30 @@ class Rover
         throw new UnsupportedRoverCommandException();
     }
 
-    private function move(): Rover
+    public function executeMultiple(CommandCollection $commands): self
+    {
+        foreach ($commands as $command) {
+            $this->execute($command);
+        }
+
+        return $this;
+    }
+
+    public function getPosition(): Position
+    {
+        return $this->position;
+    }
+
+    protected function setPosition(Position $position): self
+    {
+        if ($this->plateau->isOutOfBounds($position)) {
+            throw new RoverIsOutOfBoundsException('Rover cannot move outside the plateau.');
+        }
+
+        return $this->traitSetPosition($position);
+    }
+
+    private function move(): self
     {
         $direction = $this->getDirection()->getDirection();
 
@@ -90,22 +119,21 @@ class Rover
                 break;
 
             default:
-
                 throw new InvalidDirectionException();
         }
 
         return $this->setPosition($position);
     }
 
-    private function rotate(string $direction): Rover
+    private function rotate(string $direction): self
     {
-        if ($direction == 'L') {
+        if ($direction === 'L') {
             $direction = $this->getDirection()->getLeft();
 
             return $this->setDirection($direction);
         }
 
-        if ($direction == 'R') {
+        if ($direction === 'R') {
             $direction = $this->getDirection()->getRight();
 
             return $this->setDirection($direction);
@@ -113,32 +141,4 @@ class Rover
 
         throw new InvalidDirectionException();
     }
-
-    protected function setPosition(Position $position): Rover
-    {
-        if ($this->plateau->isOutOfBounds($position)) {
-            throw new RoverIsOutOfBoundsException('Rover cannot move outside the plateau.');
-        }
-
-        return $this->traitSetPosition($position);
-    }
-
-    public function getPosition(): Position
-    {
-        return $this->position;
-    }
-
-    public function __toString()
-    {
-        return implode(
-            ' ',
-            [
-                $this->getPosition()->getX(),
-                $this->getPosition()->getY(),
-                $this->getDirection()->getDirection(),
-            ]
-        );
-
-    }
-
 }

@@ -1,11 +1,11 @@
-<?php
+<?php declare (strict_types = 1);
 
 namespace MarsRover\IO;
 
 class Input
 {
-
     private $plateau;
+
     private $rovers = [];
 
     public function __construct(string $input)
@@ -17,13 +17,13 @@ class Input
         $this->plateau = new PlateauInput(array_shift($input));
 
         foreach ($input as $index => $line) {
-            if ($index % 2 == 1) {
+            if ($index % 2 === 1) {
                 continue;
             }
 
             $this->rovers[] = new RoverInput(
                 $line,
-                isset($input[$index + 1]) ? $input[$index + 1] : ''
+                $input[$index + 1] ?? ''
             );
         }
     }

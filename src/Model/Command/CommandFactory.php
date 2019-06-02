@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types = 1);
 
 namespace MarsRover\Model\Command;
 
@@ -25,5 +25,4 @@ class CommandFactory
 
         throw new InvalidRoverCommandException('Command ' . $command . ' is not acceptable.');
     }
-
 }

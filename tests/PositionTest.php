@@ -1,14 +1,12 @@
-<?php
+<?php declare (strict_types = 1);
 
 class PositionTest extends \PHPUnit\Framework\TestCase
 {
-
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $position = new \MarsRover\Model\Geography\Position(1, 5);
 
-        $this->assertEquals(1, $position->getX());
-        $this->assertEquals(5, $position->getY());
+        $this->assertSame(1, $position->getX());
+        $this->assertSame(5, $position->getY());
     }
-
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types = 1);
 
 namespace MarsRover\IO;
 
@@ -8,9 +8,14 @@ class Output
 {
     private $output = [];
 
-    public function addRover(Rover $rover): Output
+    public function __toString()
     {
-        $this->output[] = (string)$rover;
+        return implode(PHP_EOL, $this->getOutput());
+    }
+
+    public function addRover(Rover $rover): self
+    {
+        $this->output[] = (string) $rover;
 
         return $this;
     }
@@ -19,11 +24,4 @@ class Output
     {
         return $this->output;
     }
-
-    public function __toString()
-    {
-        return implode(PHP_EOL, $this->getOutput());
-    }
-
-
 }

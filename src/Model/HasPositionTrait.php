@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types = 1);
 
 namespace MarsRover\Model;
 
@@ -6,7 +6,6 @@ use MarsRover\Model\Geography\Position;
 
 trait HasPositionTrait
 {
-
     private $position;
 
     public function getPosition(): Position
@@ -20,5 +19,4 @@ trait HasPositionTrait
 
         return $this;
     }
-
 }

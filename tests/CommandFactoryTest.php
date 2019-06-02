@@ -1,9 +1,8 @@
-<?php
+<?php declare (strict_types = 1);
 
 class CommandFactoryTest extends \PHPUnit\Framework\TestCase
 {
-
-    public function testCommandFactory()
+    public function testCommandFactory(): void
     {
         $command = \MarsRover\Model\Command\CommandFactory::getCommand('M');
 
@@ -18,12 +17,10 @@ class CommandFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(\MarsRover\Model\Command\RotateRightCommand::class, $command);
     }
 
-    public function testCommandFactory_fail()
+    public function testCommandFactoryFail(): void
     {
         $this->expectException(\MarsRover\Exception\InvalidRoverCommandException::class);
 
         \MarsRover\Model\Command\CommandFactory::getCommand('F');
     }
-
-
 }

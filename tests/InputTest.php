@@ -1,34 +1,34 @@
-<?php
+<?php declare(strict_types=1);
 
 class InputTest extends \PHPUnit\Framework\TestCase
 {
-    public function testParsePosition()
+    public function testParsePosition(): void
     {
         $input    = '2 3';
         $position = \MarsRover\IO\PlateauInput::parsePosition($input);
 
-        $this->assertEquals(2, $position->getX());
-        $this->assertEquals(3, $position->getY());
+        $this->assertSame(2, $position->getX());
+        $this->assertSame(3, $position->getY());
     }
 
-    public function testParsePose()
+    public function testParsePose(): void
     {
         $input = '2 3 N';
         $pose  = \MarsRover\IO\RoverInput::parsePose($input);
 
-        $this->assertEquals(2, $pose->getPosition()->getX());
-        $this->assertEquals(3, $pose->getPosition()->getY());
-        $this->assertEquals('N', $pose->getDirection()->getDirection());
+        $this->assertSame(2, $pose->getPosition()->getX());
+        $this->assertSame(3, $pose->getPosition()->getY());
+        $this->assertSame('N', $pose->getDirection()->getDirection());
 
         $input = '5 2 W';
         $pose  = \MarsRover\IO\RoverInput::parsePose($input);
 
-        $this->assertEquals(5, $pose->getPosition()->getX());
-        $this->assertEquals(2, $pose->getPosition()->getY());
-        $this->assertEquals('W', $pose->getDirection()->getDirection());
+        $this->assertSame(5, $pose->getPosition()->getX());
+        $this->assertSame(2, $pose->getPosition()->getY());
+        $this->assertSame('W', $pose->getDirection()->getDirection());
     }
 
-    public function testParseCommands()
+    public function testParseCommands(): void
     {
         $expected = (new \MarsRover\Model\Command\CommandCollection())
             ->addCommands(
@@ -48,7 +48,7 @@ class InputTest extends \PHPUnit\Framework\TestCase
         $input    = 'LMLMLMLMM';
         $commands = \MarsRover\IO\RoverInput::parseCommands($input);
 
-        $this->assertEquals($expected, $commands);
+        $this->assertSame($expected, $commands);
 
         $expected = (new \MarsRover\Model\Command\CommandCollection())
             ->addCommands(
@@ -69,24 +69,23 @@ class InputTest extends \PHPUnit\Framework\TestCase
         $input    = 'MMRMMRMRRM';
         $commands = \MarsRover\IO\RoverInput::parseCommands($input);
 
-        $this->assertEquals($expected, $commands);
+        $this->assertSame($expected, $commands);
     }
 
-    public function testInput()
+    public function testInput(): void
     {
-
         $input = new \MarsRover\IO\Input(
-            "
+            '
                 5 5
                 1 2 N
                 LMLMLMLMM
                 3 3 E
                 MMRMMRMRRM            
-            "
+            '
         );
 
         $plateau_input = $input->getPlateau();
-        $this->assertEquals(
+        $this->assertSame(
             new \MarsRover\Model\Geography\Position(5, 5),
             $plateau_input->getPosition()
         );
@@ -132,8 +131,8 @@ class InputTest extends \PHPUnit\Framework\TestCase
         ];
 
         foreach ($rovers_input as $index => $item) {
-            $this->assertEquals($expected_rovers_input[$index][0], $item->getPose());
-            $this->assertEquals($expected_rovers_input[$index][1], $item->getCommands());
+            $this->assertSame($expected_rovers_input[$index][0], $item->getPose());
+            $this->assertSame($expected_rovers_input[$index][1], $item->getCommands());
         }
     }
 }

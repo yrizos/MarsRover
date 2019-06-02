@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types = 1);
 
 namespace MarsRover\Model\Geography;
 
@@ -13,7 +13,7 @@ class Direction
         $direction = trim($direction);
         $direction = strtoupper($direction);
 
-        if (!in_array($direction, ['N', 'S', 'W', 'E'])) {
+        if (! in_array($direction, ['N', 'S', 'W', 'E'], true)) {
             throw new InvalidDirectionException('Direction ' . $direction . ' is invalid.');
         }
 
@@ -25,43 +25,41 @@ class Direction
         return $this->direction;
     }
 
-    public function getLeft(): Direction
+    public function getLeft(): self
     {
         switch ($this->getDirection()) {
             case 'N':
-                return new Direction('W');
+                return new self('W');
 
             case 'W':
-                return new Direction('S');
+                return new self('S');
 
             case 'S':
-                return new Direction('E');
+                return new self('E');
 
             case 'E':
-                return new Direction('N');
+                return new self('N');
         }
 
         return $this;
     }
 
-    public function getRight(): Direction
+    public function getRight(): self
     {
         switch ($this->getDirection()) {
             case 'N':
-                return new Direction('E');
+                return new self('E');
 
             case 'W':
-                return new Direction('N');
+                return new self('N');
 
             case 'S':
-                return new Direction('W');
+                return new self('W');
 
             case 'E':
-                return new Direction('S');
+                return new self('S');
         }
 
         return $this;
     }
-
-
 }

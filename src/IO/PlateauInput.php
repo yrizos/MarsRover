@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types = 1);
 
 namespace MarsRover\IO;
 
@@ -19,14 +19,13 @@ class PlateauInput
         $string  = trim($string);
         $pattern = '/([0-9]{0,15}) ([0-9]{0,15})/';
 
-        if (!preg_match($pattern, $string, $matches, PREG_OFFSET_CAPTURE)) {
+        if (! preg_match($pattern, $string, $matches, PREG_OFFSET_CAPTURE)) {
             throw new InvalidInputException($string . ' is not valid position input.');
         }
 
         return new Position(
-            (int)$matches[1][0],
-            (int)$matches[2][0]
+            (int) $matches[1][0],
+            (int) $matches[2][0]
         );
     }
-
 }

@@ -1,35 +1,25 @@
-<?php
+<?php declare (strict_types = 1);
 
 class PlateauTest extends \PHPUnit\Framework\TestCase
 {
-
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $lowerLeftCoordinates  = new \MarsRover\Model\Geography\Position(0, 0);
         $upperRightcoordinates = new \MarsRover\Model\Geography\Position(3, 4);
         $plateau               = new \MarsRover\Model\Geography\Plateau($upperRightcoordinates);
 
-        $this->assertEquals($lowerLeftCoordinates->getX(), $plateau->getLowerLeftCoordinates()->getX());
-        $this->assertEquals($lowerLeftCoordinates->getY(), $plateau->getLowerLeftCoordinates()->getY());
-        $this->assertEquals($upperRightcoordinates->getX(), $plateau->getUpperRightCoordinates()->getX());
-        $this->assertEquals($upperRightcoordinates->getY(), $plateau->getUpperRightCoordinates()->getY());
+        $this->assertSame($lowerLeftCoordinates->getX(), $plateau->getLowerLeftCoordinates()->getX());
+        $this->assertSame($lowerLeftCoordinates->getY(), $plateau->getLowerLeftCoordinates()->getY());
+        $this->assertSame($upperRightcoordinates->getX(), $plateau->getUpperRightCoordinates()->getX());
+        $this->assertSame($upperRightcoordinates->getY(), $plateau->getUpperRightCoordinates()->getY());
     }
 
-    public function testIsOutOfBounds()
+    public function testIsOutOfBounds(): void
     {
         $plateau = new \MarsRover\Model\Geography\Plateau(new \MarsRover\Model\Geography\Position(4, 5));
 
-        for (
-            $x = $plateau->getLowerLeftCoordinates()->getX();
-            $x <= $plateau->getUpperRightCoordinates()->getX();
-            $x++
-        ) {
-
-            for (
-                $y = $plateau->getLowerLeftCoordinates()->getY();
-                $y <= $plateau->getUpperRightCoordinates()->getY();
-                $y++
-            ) {
+        for ($x = $plateau->getLowerLeftCoordinates()->getX(); $x <= $plateau->getUpperRightCoordinates()->getX(); $x++) {
+            for ($y = $plateau->getLowerLeftCoordinates()->getY(); $y <= $plateau->getUpperRightCoordinates()->getY(); $y++) {
                 $coordinates = new \MarsRover\Model\Geography\Position($x, $y);
 
                 $this->assertFalse($plateau->isOutOfBounds($coordinates));
@@ -37,7 +27,7 @@ class PlateauTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testIsOutOfBoundsFail()
+    public function testIsOutOfBoundsFail(): void
     {
         $plateau = new \MarsRover\Model\Geography\Plateau(new \MarsRover\Model\Geography\Position(4, 5));
 
@@ -50,7 +40,5 @@ class PlateauTest extends \PHPUnit\Framework\TestCase
             $this->assertTrue($plateau->isOutOfBounds(new \MarsRover\Model\Geography\Position($x, -1)));
             $this->assertTrue($plateau->isOutOfBounds(new \MarsRover\Model\Geography\Position($x, 6)));
         }
-
     }
-
 }
