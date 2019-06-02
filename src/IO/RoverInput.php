@@ -2,6 +2,7 @@
 
 namespace MarsRover\IO;
 
+use MarsRover\Exception\InvalidInputException;
 use MarsRover\Model\Command\CommandCollection;
 use MarsRover\Model\Command\CommandFactory;
 use MarsRover\Model\Geography\Direction;

@@ -5,7 +5,7 @@ namespace MarsRover\IO;
 class Input
 {
     /**
-     * @var PlateuInput
+     * @var PlateauInput
      */
     private $plateau;
 
@@ -23,10 +23,15 @@ class Input
             "\n"   => PHP_EOL,
         ]);
 
-        $input = explode(PHP_EOL, $input);
-        $input = array_map('trim', $input);
+        $input   = explode(PHP_EOL, $input);
+        $input   = array_map('trim', $input);
+        $plateau = array_shift($input);
 
-        $this->plateau = new PlateauInput(array_shift($input));
+        if (empty($plateau)) {
+            $plateau = '';
+        }
+
+        $this->plateau = new PlateauInput($plateau);
 
         foreach ($input as $index => $line) {
             if ($index % 2 === 1) {

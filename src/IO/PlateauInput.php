@@ -2,6 +2,7 @@
 
 namespace MarsRover\IO;
 
+use MarsRover\Exception\InvalidInputException;
 use MarsRover\Model\Geography\Position;
 use MarsRover\Model\HasPositionTrait;
 

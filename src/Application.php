@@ -12,7 +12,15 @@ class Application
     public static function run(string $input): Output
     {
         if (is_file($input)) {
+            if (! is_readable($input)) {
+                throw new \InvalidArgumentException($input . ' is not readable.');
+            }
+
             $input = file_get_contents($input);
+
+            if (empty($input)) {
+                throw new \InvalidArgumentException($input . ' is empty.');
+            }
         }
 
         $input   = new Input($input);
